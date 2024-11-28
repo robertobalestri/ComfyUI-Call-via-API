@@ -49,7 +49,7 @@ def run_scene_generation_no_swapping(scene_input, output_name=None):
     
 
     # Update the workflow JSON with the provided input and random seed
-    workflow_json = update_workflow_json(workflow_json, {"25": {"inputs": {"seed": random.randint(0, 99999999999999999)}}})  # Update the seed in the workflow
+    workflow_json = update_workflow_json(workflow_json, {"25": {"inputs": {"noise_seed": random.randint(0, 99999999999999999)}}})  # Update the seed in the workflow
     workflow_json = update_workflow_json(workflow_json, {"6": {"inputs": {"text": scene_input}}})
 
     # Print the workflow JSON with indentation

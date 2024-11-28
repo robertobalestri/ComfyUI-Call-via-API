@@ -33,18 +33,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 load_dotenv()
 
-def update_face_swapping_workflow_json(workflow_json, face_input, character_input, scene_input, random_seed):
-    """Update the workflow JSON with provided inputs and random seed."""
-    logging.info("Updating face swapping workflow JSON")
-    updates = {
-        "191": {"inputs": {"text": face_input}},
-        "189": {"inputs": {"text": character_input}},
-        "193": {"inputs": {"text": scene_input}},
-        "31": {"inputs": {"seed": random_seed}}  # Update the seed in the workflow
-    }
-    return update_workflow_json(workflow_json, updates)
-
-def run_face_swapping(face_input, character_input, scene_input, face_path, output_name=None):
+def run_face_swapping(face_input, character_input, scene_input, face_path, output_name=None, siamesi=False):
     """
     Run the face swapping process using the Replicate API.
 
@@ -59,12 +48,24 @@ def run_face_swapping(face_input, character_input, scene_input, face_path, outpu
         PIL.Image: The output image from the Replicate API.
     """
     logging.info("Starting face swapping process")
-    workflow_json = load_json_file("workflows/face_swapping_REPLICATE.json")
     
-
-    # Update the workflow JSON with the provided inputs and random seed
-    workflow_json = update_face_swapping_workflow_json(workflow_json, face_input, character_input, scene_input, random.randint(0, 99999999999999999))
-
+    if siamesi:
+        workflow_json = load_json_file("workflows/flux_siamesi.json")
+    else:
+        workflow_json = load_json_file("workflows/flux_faceswap.json")
+    
+    scene_input = face_input + "\n" + character_input + "\n" + scene_input
+    
+    print("prompt for flux: ", scene_input)
+    
+    # Update the workflow JSON with the provided input and random seed
+    workflow_json = update_workflow_json(workflow_json, {"25": {"inputs": {"noise_seed": random.randint(0, 99999999999999999)}}})  # Update the seed in the workflow
+    workflow_json = update_workflow_json(workflow_json, {"6": {"inputs": {"text": scene_input}}})
+    workflow_json = update_workflow_json(workflow_json, {"58": {"inputs": {"image": "input.jpg"}}})
+    
+    # Print the workflow JSON with indentation
+    logging.info(f"Workflow JSON: {json.dumps(workflow_json, indent=2)}")
+    
     input = {
         "workflow_json": json.dumps(workflow_json),
         "output_quality": 100,
