@@ -33,7 +33,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 load_dotenv()
 
-def run_no_swap(scene_input, output_name=None):
+def run_no_swap(prompt_input, output_name=None):
     """
     Run the scene generation process using the Replicate API.
 
@@ -50,7 +50,7 @@ def run_no_swap(scene_input, output_name=None):
 
     # Update the workflow JSON with the provided input and random seed
     workflow_json = update_workflow_json(workflow_json, {"25": {"inputs": {"noise_seed": random.randint(0, 99999999999999999)}}})  # Update the seed in the workflow
-    workflow_json = update_workflow_json(workflow_json, {"6": {"inputs": {"text": scene_input}}})
+    workflow_json = update_workflow_json(workflow_json, {"6": {"inputs": {"text": prompt_input}}})
 
     # Print the workflow JSON with indentation
     logging.info(f"Workflow JSON: {json.dumps(workflow_json, indent=2)}")
