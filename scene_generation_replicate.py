@@ -33,7 +33,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 load_dotenv()
 
-def run_scene_generation_no_swapping(scene_input, output_name=None):
+def run_no_swap(scene_input, output_name=None):
     """
     Run the scene generation process using the Replicate API.
 

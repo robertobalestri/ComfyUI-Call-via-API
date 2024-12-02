@@ -10,7 +10,7 @@ Usage:
 """
 
 from face_swapping_replicate import run_face_swapping
-from scene_generation_replicate import run_scene_generation_no_swapping
+from scene_generation_replicate import run_no_swap
 
 if __name__ == "__main__":
 
@@ -34,6 +34,6 @@ if __name__ == "__main__":
     # SCENE GENERATION
     scene_only_input = "A photo of a lone figure clad in weathered, metallic armor adorned with faint glowing runes that pulse softly in contrasting hues of warm gold and cold blue, standing in a profile view against the backdrop of a dimly lit medieval chamber. The figure’s iron mask is featureless yet polished enough to faintly reflect the interplay of light, and a dark hooded cloak cascades behind them, adding to the imposing aesthetic. The tilt-shift angle creates a dynamic focus on the character, while the edges reveal subtle details such as a weathered altar with scattered chains and faint symbols etched into the stone floor. The atmosphere is a blend of mysticism and foreboding, with warm torchlight and cool moonlight intersecting to create a dramatic play of shadows and light. Muted tones of silver, black, and gold dominate the palette, reinforcing the dark medieval theme with a hint of transcendence."
     output_name_scene = "outputs/output_scene_generated.jpg"  # Custom output name
-    output = run_scene_generation_no_swapping(scene_only_input, output_name_scene)
+    output = run_no_swap(scene_only_input, output_name_scene)
     
 
