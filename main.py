@@ -15,26 +15,24 @@ from scene_generation_replicate import run_scene_generation_no_swapping
 if __name__ == "__main__":
 
     # FACE SWAPPING
-    face_input = "Photo of male, pale skin, asymmetric facial features with a scar over the right eye, dark circles under the eyes, shaved head, and one eye glowing faintly red, giving an unsettling and freakish vibe"
-    character_input = "Wearing torn, mismatched urban streetwear including a tattered hoodie, ripped jeans, and heavy black combat boots. Accessories include spiked bracelets and a chain hanging from his pocket"
-    scene_input = "In an abandoned subway station with graffiti-covered walls, flickering fluorescent lights, and trash scattered across the floor. The atmosphere is tense, with distant sounds of dripping water and the occasional echo of a train in the background"
-
-    face_path = "face.jpeg"
+    prompt_input = "A photo of a young, androgynous person with an oval face, delicate features, fair skin, straight light brown hair styled short, almond-shaped eyes, fine eyebrows, soft lips, and a small nose. They have a slim build, average height, fair skin, narrow shoulders, and a smooth, androgynous body. Their style is casual yet edgy, with a minimalist look, tailored jackets, fitted pants, and fluid fashion choices. The background is an abandoned subway station with graffiti-covered walls, flickering fluorescent lights, and trash scattered across the floor. The atmosphere is tense, with distant sounds of dripping water and the occasional echo of a train in the background. The subject is placed in front of the camera, 3 meters away."
+    
+    face_path = "face_manueste.jpeg"
     output_name_face_swap = "outputs/output_face_swapped.jpg"  # Custom output name
     print("Running face swapping...")
     
     
     siamesi = False
-    run_face_swapping(face_input, character_input, scene_input, face_path, output_name_face_swap, siamesi)
+    run_face_swapping(prompt_input, face_path, output_name_face_swap, siamesi = False)
     
     
     output_name_face_swap = "outputs/output_face_swapped_siamesi.jpg"  # Custom output name
     siamesi = True
-    run_face_swapping(face_input, character_input, scene_input, face_path, output_name_face_swap, siamesi)
+    run_face_swapping(prompt_input, face_path, output_name_face_swap, siamesi = True)
 
 
     # SCENE GENERATION
-    scene_only_input = "A ball on a football field, in the distance a player is running"
+    scene_only_input = "A photo of a lone figure clad in weathered, metallic armor adorned with faint glowing runes that pulse softly in contrasting hues of warm gold and cold blue, standing in a profile view against the backdrop of a dimly lit medieval chamber. The figure’s iron mask is featureless yet polished enough to faintly reflect the interplay of light, and a dark hooded cloak cascades behind them, adding to the imposing aesthetic. The tilt-shift angle creates a dynamic focus on the character, while the edges reveal subtle details such as a weathered altar with scattered chains and faint symbols etched into the stone floor. The atmosphere is a blend of mysticism and foreboding, with warm torchlight and cool moonlight intersecting to create a dramatic play of shadows and light. Muted tones of silver, black, and gold dominate the palette, reinforcing the dark medieval theme with a hint of transcendence."
     output_name_scene = "outputs/output_scene_generated.jpg"  # Custom output name
     output = run_scene_generation_no_swapping(scene_only_input, output_name_scene)
     

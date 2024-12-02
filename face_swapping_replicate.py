@@ -33,7 +33,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 load_dotenv()
 
-def run_face_swapping(face_input, character_input, scene_input, face_path, output_name=None, siamesi=False):
+def run_face_swapping(prompt_input, face_path, output_name=None, siamesi=False):
     """
     Run the face swapping process using the Replicate API.
 
@@ -54,13 +54,13 @@ def run_face_swapping(face_input, character_input, scene_input, face_path, outpu
     else:
         workflow_json = load_json_file("workflows/flux_faceswap.json")
     
-    scene_input = face_input + "\n" + character_input + "\n" + scene_input
     
-    print("prompt for flux: ", scene_input)
+    
+    print("prompt for flux: ", prompt_input)
     
     # Update the workflow JSON with the provided input and random seed
     workflow_json = update_workflow_json(workflow_json, {"25": {"inputs": {"noise_seed": random.randint(0, 99999999999999999)}}})  # Update the seed in the workflow
-    workflow_json = update_workflow_json(workflow_json, {"6": {"inputs": {"text": scene_input}}})
+    workflow_json = update_workflow_json(workflow_json, {"6": {"inputs": {"text": prompt_input}}})
     workflow_json = update_workflow_json(workflow_json, {"58": {"inputs": {"image": "input.jpg"}}})
     
     # Print the workflow JSON with indentation
