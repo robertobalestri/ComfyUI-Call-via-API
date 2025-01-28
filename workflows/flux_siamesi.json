@@ -1,7 +1,7 @@
 {
   "6": {
     "inputs": {
-      "text": "An old guy walking on the water of a pool. Miami buildings. Photorealistic",
+      "text": "Photo of Young, androgynous with oval face, delicate features, fair skin, straight light brown hair styled short, almond-shaped eyes, fine eyebrows, soft lips, small nose, textured skin.\nSlim build, average height, fair skin, narrow shoulders, smooth, androgynous body, fluid fashion choices, almost naked, sexy.\nPlaced in the methaphorical but physical place of the nothingness, her\nshoulders emerge from water.",
       "clip": [
         "11",
         0
@@ -53,8 +53,9 @@
   "11": {
     "inputs": {
       "clip_name1": "t5xxl_fp16.safetensors",
-      "clip_name2": "ViT-L-14-TEXT-detail-improved-hiT-GmP-TE-only-HF.safetensors",
-      "type": "flux"
+      "clip_name2": "clip_l.safetensors",
+      "type": "flux",
+      "device": "default"
     },
     "class_type": "DualCLIPLoader",
     "_meta": {
@@ -110,8 +111,8 @@
   },
   "17": {
     "inputs": {
-      "scheduler": "beta",
-      "steps": 30,
+      "scheduler": "simple",
+      "steps": 20,
       "denoise": 1,
       "model": [
         "30",
@@ -141,7 +142,7 @@
   },
   "25": {
     "inputs": {
-      "noise_seed": 537197311937283
+      "noise_seed": 475954347454238
     },
     "class_type": "RandomNoise",
     "_meta": {
@@ -150,7 +151,7 @@
   },
   "26": {
     "inputs": {
-      "guidance": 3.0,
+      "guidance": 3.5,
       "conditioning": [
         "6",
         0
@@ -235,7 +236,7 @@
   },
   "58": {
     "inputs": {
-      "image": "Screenshot 2024-10-16 192018.png",
+      "image": "Copia di 2.1 Manu&Ste foto_tessera.webp",
       "upload": "image"
     },
     "class_type": "LoadImage",
@@ -302,6 +303,18 @@
     "class_type": "Image Flip",
     "_meta": {
       "title": "Image Flip"
+    }
+  },
+  "63": {
+    "inputs": {
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
     }
   }
 }

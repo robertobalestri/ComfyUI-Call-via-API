@@ -5,6 +5,7 @@ Common utility functions for ComfyUI workflows
 import json
 import base64
 import logging
+import asyncio
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -30,3 +31,19 @@ def update_workflow_json(workflow_json, updates):
             workflow_json[node_id]["inputs"].update(node_updates["inputs"])
             logging.debug(f"Updated node {node_id} with inputs: {node_updates['inputs']}")
     return workflow_json
+
+def run_asyncio_task(coroutine_fn, *args, **kwargs):
+    """
+    Runs an asyncio coroutine, handling the "Event loop is closed" issue.
+    """
+    try:
+        asyncio.run(coroutine_fn(*args, **kwargs))
+    except RuntimeError as e:
+        if str(e) == "Event loop is closed":
+            # Create a new event loop and run the coroutine
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            loop.run_until_complete(coroutine_fn(*args, **kwargs))
+            loop.close()
+        else:
+            raise

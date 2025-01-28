@@ -62,7 +62,8 @@ def run_no_swap(prompt_input, output_name=None):
 
     logging.info("Running the Replicate API for scene generation")
     output = replicate.run(
-        "fofr/any-comfyui-workflow:61e713aa841c3a275d7097b209a75873e1f950bb79c5fbec1a94be351cea8fdd",
+        #"fofr/any-comfyui-workflow:61e713aa841c3a275d7097b209a75873e1f950bb79c5fbec1a94be351cea8fdd",
+        "fofr/any-comfyui-workflow:1b5a4de260284f9a7781123caef8e040f2422b0123c10b9871cb53db58966b0f",
         input=input
     )
 
